@@ -1,0 +1,429 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://th.bing.com/th/id/OIP.p78pOUzVfg1UigIFMwKr_gHaEb?pid=ImgDet&rs=1" type="icon">
+  <title>Bill Genrator FOR CARS</title>
+  <style>
+     body,select,input[type="text"],textarea{
+      font-weight: bold;
+      text-transform: uppercase;
+      font-family: cursive;
+    }
+    table,
+    tr,
+    td {
+      border: 2px solid greenyellow;
+      border-collapse: collapse;
+      padding: 5px;
+      margin-top: 30px;
+      margin: 0 auto;
+
+    }
+
+    .pricelist {
+      text-align: center;
+    }
+
+    .mybutton {
+      background-color: #4CAF50;
+
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      border: none;
+      display: inline-block;
+      font-size: 16px;
+
+      cursor: pointer;
+      background-color: #555555;
+      border-radius: 4px;
+    }
+
+    #entrybox {
+      width: 20%;
+      height: 43px;
+      margin-left: 5px;
+      border: 2px solid #b4b39d;
+      border-radius: 6px;
+      background-color: #c3c2ab;
+    }
+
+    .bill {
+      margin-left: 23%;
+      margin-right: 20%;
+
+    }
+
+    .bill1 {
+    }
+
+    #sf {
+      height: 48px;
+      border: 2px solid #b4b39d;
+      border-radius: 4px;
+    }
+
+
+    .td{
+        align:center;
+    }
+    .services{
+        display: flex;
+    align-items: stretch;
+    justify-content: flex-start;
+    }
+    #check{
+            background-color: #038496;
+            color: white;
+            cursor: pointer;
+            padding: 10px 30px;
+            border-radius: 30px;
+        }
+        .billing-receipt{
+            display: none;
+
+        }
+  </style>
+</head>
+<body>
+  <div class="pricelist">
+   <h1>Types of service Available Here.....!</h1>
+    <h1>SERVICE MENU</h1>
+    <table>
+      <tr>
+        <th>Service</th>
+        <td>Basic Servicing</td>
+        <td>Engine Fixing</td>
+        <td>Clutch Fixing</td>
+        <td>Brake Fixing</td>
+        <td>Gear Fixing</td>
+      </tr>
+      <tr>
+        <th>Service Code</th>
+        <td>BS01</td>
+        <td>EF01</td>
+        <td>CF01</td>
+        <td>BF01</td>
+        <td>GF01</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <div style="display: flex;align-self: start;width: 100%;">
+  <div class="left-section">
+    <img src="https://www.singhsautocentre.com.au/wp-content/uploads/2017/02/auto-repair-team.png" alt="Car Service Station" height="250px" width="550px" id="serviceImg">
+    </div>
+<div class="right-section" id="rightSection" style="width:40%;">
+
+  <form class="bill1">
+    <div class="services">
+    <div style="margin: auto;">
+    <select id="carType" style="padding: 5px;
+    font-family: cursive;
+    border: 3px solid deepskyblue;border-radius: 10px;">
+  <option  value = "Hatchback">Hatchback</option>
+  <option value = "Sedan">Sedan</option>
+  <option value = "SUV">SUV</option>
+  <option selected value = "Guava">other</option>
+</select>
+    </div>
+    <div>
+<label for="services" style="color: #FF1621;"><strong>Select Services</strong> </label> <br>
+<input type="checkbox" name="Basic Servicing" id="BS01"> <label>Basic Servicing</label>  <br>
+<input type="checkbox" name="Engine Fixing" id="EF01">  <label>Engine Fixing</label> <br>
+<input type="checkbox" name="Clutch Fixing" id="CF01">  <label>Clutch Fixing</label> <br>      
+<input type="checkbox" name="Brake Fixing" id="BF01">  <label>Brake Fixing</label> <br>          
+<input type="checkbox" name="Gear Fixing" id="GF01">  <label>Gear Fixing</label> <br>     
+<br> <br>  &nbsp;&nbsp;
+</div>
+</div>
+<input type="button" value="ADD T0 CART" class="mybutton" id="check">
+</form>
+</div>
+  <div class="billing-receipt" id="billingReceipt">
+    <table>
+    <tr>
+    <h3>Service Charges</h3> 
+    <th>Type of Car</th> <td> <span id="carName"></span></td></tr>
+    <tr>
+    <th>Services</th> <td><span id="services"></span></td></tr>
+    <tr>
+   <th>Service Codes:</th> <td><span id="serviceCodes"></span></td></tr>
+    <p><strong>Charges for <span id="chargesFor"></span> </strong> <span id="chargesAmt"></span></p>
+    <p><strong>Total Bill: </span> </strong> <span id="totalBill"></span></p>
+    <p> <strong id="highCharges"></strong> </p>
+
+    </table>
+</div>
+
+  <script>
+        
+
+    let checkBoxBS = document.getElementById("BS01");
+        let checkBoxEF = document.getElementById("EF01");
+        let checkBoxCF = document.getElementById("CF01");
+        let checkBoxBF = document.getElementById("BF01");
+        let checkBoxGF = document.getElementById("GF01");
+
+
+    let serviceImg = document.getElementById("serviceImg");
+    serviceImg.addEventListener("load",()=>{
+        serviceImg.style.marginLeft="0px";
+        
+    });
+
+
+
+    let check = document.getElementById("check");
+    check.addEventListener("click", () =>{
+
+        if(checkBoxBS.checked == false && checkBoxEF.checked == false && checkBoxCF.checked == false && checkBoxBF.checked == false && checkBoxGF.checked == false ){
+            alert("Please select services!");
+        }
+     
+        let rightSection = document.getElementById("rightSection").style.display="none";
+        let billingReceipt = document.getElementById("billingReceipt").style.display="block";
+        
+
+        let carName = document.getElementById("carName");
+        let carType = document.getElementById("carType").value;
+
+        
+        if(carType == "Sedan"){
+            carName.innerText ="Sedan";
+        }else if(carType == "Hatchback"){
+            carName.innerText ="Hatchback";
+        }
+        else if(carType == "SUV"){
+            carName.innerText ="SUV";
+        }
+        else{
+            alert("Please Select Type of Car!");
+        }
+        
+        
+        
+       
+
+        let services = document.getElementById("services");
+        let chargesFor = document.getElementById("chargesFor");
+
+
+        if(checkBoxBS.checked == true){
+            let createTextNode= document.createTextNode(" Basic Servicing,");
+            services.appendChild(createTextNode);
+
+            let serviceCodes = document.getElementById("serviceCodes");
+            let createTextServiceCodes= document.createTextNode(" BS01,");
+            serviceCodes.appendChild(createTextServiceCodes);
+
+            
+            
+            let createTextNode2= document.createTextNode(" Basic Servicing,");
+            chargesFor.appendChild(createTextNode2);
+
+        }
+        if(checkBoxEF.checked == true){
+            // services.innerText ="Engine Fixing";
+            let createTextNode= document.createTextNode(" Engine Fixing,");
+            services.appendChild(createTextNode);
+
+            let createTextServiceCodes= document.createTextNode(" EF01,");
+            serviceCodes.appendChild(createTextServiceCodes);
+
+            
+            
+            let createTextNode2= document.createTextNode(" Engine Fixing,");
+            chargesFor.appendChild(createTextNode2);
+        }
+        if(checkBoxCF.checked == true){
+            
+            let createTextNode= document.createTextNode(" Clutch Fixing,");
+            services.appendChild(createTextNode);
+
+            let createTextServiceCodes= document.createTextNode(" CF01,");
+            serviceCodes.appendChild(createTextServiceCodes);
+
+            
+            
+            let createTextNode2= document.createTextNode(" Clutch Fixing,");
+            chargesFor.appendChild(createTextNode2);
+
+        }
+        if(checkBoxBF.checked == true){
+            
+            let createTextNode= document.createTextNode(" Brake Fixing,");
+            services.appendChild(createTextNode);
+
+            let createTextServiceCodes= document.createTextNode(" BF01,");
+            serviceCodes.appendChild(createTextServiceCodes);
+
+            
+            
+            let createTextNode2= document.createTextNode(" Brake Fixing,");
+            chargesFor.appendChild(createTextNode2);
+        }
+         if(checkBoxGF.checked == true){
+            
+            let createTextNode= document.createTextNode(" Gear Fixing,");
+            services.appendChild(createTextNode);
+
+            let createTextServiceCodes= document.createTextNode(" GF01,");
+            serviceCodes.appendChild(createTextServiceCodes);
+
+            
+            
+            let createTextNode2= document.createTextNode(" Gear Fixing,");
+            chargesFor.appendChild(createTextNode2);
+        }
+        
+
+
+        //for the charges for service
+        var totalBillAmt = 0;
+        
+        let chargesAmt = document.getElementById("chargesAmt");
+
+
+        if(checkBoxBS.checked == true && carType == "Hatchback"){
+           
+            let createTextNode= document.createTextNode(" ₹ 2000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 2000;
+        } 
+
+        if(checkBoxEF.checked == true && carType == "Hatchback"){
+            
+            let createTextNode= document.createTextNode(" ₹ 5000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 5000;
+
+        } 
+
+        if(checkBoxCF.checked == true && carType == "Hatchback"){
+            
+            let createTextNode= document.createTextNode(" ₹ 2000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 2000;
+
+        } 
+
+        if(checkBoxBF.checked == true && carType == "Hatchback"){
+            
+            let createTextNode= document.createTextNode(" ₹ 1000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 1000;
+
+        } 
+
+        if(checkBoxGF.checked == true && carType == "Hatchback"){
+            
+            let createTextNode= document.createTextNode(" ₹ 3000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 3000;
+
+        } 
+
+        if(checkBoxBS.checked == true && carType == "Sedan"){
+            
+            let createTextNode= document.createTextNode(" ₹ 4000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 4000;
+
+        } 
+
+        if(checkBoxEF.checked == true && carType == "Sedan"){
+            
+            let createTextNode= document.createTextNode(" ₹ 8000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 8000;
+
+        } 
+
+        if(checkBoxCF.checked == true && carType == "Sedan"){
+           
+            let createTextNode= document.createTextNode(" ₹ 4000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 4000;
+
+        } 
+
+        if(checkBoxBF.checked == true && carType == "Sedan"){
+            
+            let createTextNode= document.createTextNode(" ₹ 1500,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 1500;
+
+        } 
+
+        if(checkBoxGF.checked == true && carType == "Sedan"){
+            
+            let createTextNode= document.createTextNode(" ₹ 6000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 6000;
+
+        } 
+
+        if(checkBoxBS.checked == true && carType == "SUV"){
+            
+            let createTextNode= document.createTextNode(" ₹ 5000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 5000;
+
+        } 
+
+        if(checkBoxEF.checked == true && carType == "SUV"){
+           
+            let createTextNode= document.createTextNode(" ₹ 10000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 10000;
+
+        } 
+
+        if(checkBoxCF.checked == true && carType == "SUV"){
+            
+            let createTextNode= document.createTextNode(" ₹ 6000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 6000;
+
+        } 
+
+        if(checkBoxBF.checked == true && carType == "SUV"){
+          
+            let createTextNode= document.createTextNode(" ₹ 2500,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 2500;
+
+        } 
+
+        if(checkBoxGF.checked == true && carType == "SUV"){
+            
+            let createTextNode= document.createTextNode(" ₹ 8000,");
+            chargesAmt.appendChild(createTextNode);
+            totalBillAmt= totalBillAmt + 8000;
+
+        }
+
+        let totalBill = document.getElementById("totalBill");
+        let highCharges = document.getElementById("highCharges");
+
+        
+        totalBill.innerText=totalBillAmt;
+
+        if(totalBillAmt > 10000){
+            highCharges.innerText = "Your Total Service Bill Amount is more than ₹ 10000!";
+            alert("You win a complimentary cleaning should be provided");
+        }
+
+
+        
+    });
+
+    
+</script>
+</body>
+
+</html>
